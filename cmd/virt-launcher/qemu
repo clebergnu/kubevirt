@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ "$2" = "started" ]; then
+    # The full xml is given on STDIN. It's possible to extract the uuid,
+    # and then filter for both the QEMU binary and the -uuid argument
+    ps -ef -o cmd | grep /usr/libexec/qemu-kvm > /tmp/qemu_command_line.txt
+fi

@@ -134,6 +134,15 @@ pkg_tar(
 )
 
 pkg_tar(
+    name = "libvirt-config-hooks",
+    srcs = [
+        ":qemu",
+    ],
+    mode = "0755",
+    package_dir = "/etc/libvirt/hooks",
+)
+
+pkg_tar(
     name = "passwd-tar",
     srcs = [
         ":group",
@@ -172,6 +181,7 @@ container_image(
     tars = select({
         "@io_bazel_rules_go//go/platform:linux_arm64": [
             ":libvirt-config",
+            ":libvirt-config-hooks",
             ":passwd-tar",
             ":nsswitch-tar",
             ":qemu-kvm-modules-dir-tar",
@@ -179,6 +189,7 @@ container_image(
         ],
         "@io_bazel_rules_go//go/platform:linux_s390x": [
             ":libvirt-config",
+            ":libvirt-config-hooks",
             ":passwd-tar",
             ":nsswitch-tar",
             ":qemu-kvm-modules-dir-tar",
@@ -186,6 +197,7 @@ container_image(
         ],
         "//conditions:default": [
             ":libvirt-config",
+            ":libvirt-config-hooks",
             ":passwd-tar",
             ":nsswitch-tar",
             ":qemu-kvm-modules-dir-tar",
